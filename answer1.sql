@@ -1,9 +1,9 @@
 -- ANSWER 1
-SELECT author_id, COUNT(paper_id) AS publication_count, COUNT(reference_paper_id) AS citation_count
-FROM (SELECT a.*, r.reference_paper_id
-      FROM paper_author AS a
-      LEFT JOIN paper_reference AS r
-      ON a.paper_id = r.reference_paper_id)
-GROUP BY author_id
 
+--각 저자별 publication_count 구하기
+SELECT author_id, count(distinct a.paper_id) as publication_count
+FROM paper_author as a
+LEFT JOIN paper_reference as r
+ON a.paper_id = r.paper_id
+GROUP BY author_id
 
